@@ -43,7 +43,14 @@ class PrintPrintEngine extends PrintEngineBase {
   public function send($filename, $force_download = TRUE) {
     header("Cache-Control: private");
     header("Content-Type: text/html");
-    echo $this->html;
+
+    $js =<<<'ENDJS'
+<script type="text/javascript">
+window.print();
+</script>
+ENDJS;
+
+    echo $this->html . $js;
   }
 
   /**
