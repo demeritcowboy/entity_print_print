@@ -32,6 +32,29 @@ class PrintPrintEngine extends PrintEngineBase {
   /**
    * {@inheritdoc}
    */
+  public function defaultConfiguration() {
+    return [
+      'custom_css' => '',
+    ];
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function buildConfigurationForm(array $form, FormStateInterface $form_state) {
+    $form['custom_css'] = [
+      '#type' => 'textarea',
+      '#title' => $this->t('Custom css'),
+      '#default_value' => $this->configuration['custom_css'],
+      '#rows' => 10,
+      '#cols' => 40,
+    ];
+    return $form;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function addPage($content) {
     $this->html .= (string) $content;
     return $this;
@@ -50,7 +73,7 @@ window.print();
 </script>
 ENDJS;
 
-    echo $this->html . $js;
+    echo '<style type="text/css">' . $this->configuration['custom_css'] . '</style>' . $this->html . $js;
   }
 
   /**
