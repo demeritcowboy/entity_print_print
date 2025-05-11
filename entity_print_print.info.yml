@@ -1,0 +1,7 @@
+name: Entity Print Print
+description: 'Allows printing for Entity Print'
+type: module
+core_version_requirement: ^10 || ^11
+package: Entity Print
+dependencies:
+  - drupal:entity_print
